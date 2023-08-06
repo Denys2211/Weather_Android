@@ -7,25 +7,92 @@
     android:orientation="vertical"
     android:background="@color/purple_200">
 
-    <ScrollView
+    <com.example.weather_android.controls.ScrollViewWithEndFunc
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbarStyle="outsideOverlay"
-        android:scrollbars="vertical"
+        android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.gridlayout.widget.GridLayout
+            android:id="@+id/rootGrid"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/purple_200"
             android:visibility="visible"
-            app:columnCount="2"
+            app:columnCount="1"
             app:rowCount="2"
             tools:visibility="visible">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/weatherOnDay"
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                app:layout_column="0"
+                app:layout_row="0">
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="200dp"
+                    android:text="CELSIUS"
+                    android:textColor="@color/white"
+                    android:textSize="18dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="14dp"
+                    android:layout_height="23dp"
+                    android:layout_marginStart="100dp"
+                    android:layout_marginBottom="100dp"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="88dp"
+                    android:layout_height="172dp"
+                    android:layout_marginTop="20dp"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="130sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="100dp"
+                    android:layout_height="94dp"
+                    android:layout_marginStart="100dp"
+                    android:layout_marginEnd="311dp"
+                    android:layout_marginBottom="300dp"
+                    android:scrollbarStyle="insideInset"
+                    android:scrollbars="none"
+                    android:src="@drawable/a03d_svg"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <FrameLayout
                 android:id="@+id/frame_list_daily_weather"
@@ -35,18 +102,15 @@
                 app:layout_column="0"
                 app:layout_row="1">
 
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="20dp"
+                    android:scrollbarSize="1dp"
+                    android:scrollbars="vertical" />
             </FrameLayout>
 
-            <androidx.gridlayout.widget.GridLayout
-                android:id="@+id/weather_on_day"
-                android:layout_width="match_parent"
-                android:layout_height="500dp"
-                app:layout_column="0"
-                app:layout_row="0">
-
-            </androidx.gridlayout.widget.GridLayout>
-
         </androidx.gridlayout.widget.GridLayout>
-    </ScrollView>
+    </com.example.weather_android.controls.ScrollViewWithEndFunc>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
