@@ -8,4 +8,4 @@
 Weatherapp is a simple weather forecast app, which uses some APIs to fetch 5 day / 3 hour forecast data from the [OpenWeatherMap](https://openweathermap.org/forecast5) and to fetch places,cities,counties,coords etc.
 
 # Outputs
-V1.0![GCiX6UrKR1](https://github.com/Denys2211/Weather_Android/assets/75207437/9248c16a-b77d-4b8b-b1fb-a8fbefd14a7a)
+V1.0_beta![GCiX6UrKR1](https://github.com/Denys2211/Weather_Android/assets/75207437/9248c16a-b77d-4b8b-b1fb-a8fbefd14a7a)
