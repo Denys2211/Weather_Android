@@ -5,22 +5,19 @@ import android.content.res.Resources
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.core.content.ContextCompat
-import com.example.weather_android.controls.DirectionScroll
 import com.example.weather_android.controls.ScrollViewWithEndFunc
 import com.example.weather_android.databinding.GeneralPageBinding
+import com.jakewharton.threetenabp.AndroidThreeTen
 
 
 class MainActivity : ComponentActivity() {
     private var heightRoot: Int = 1
     private lateinit var baseView: GeneralPageBinding
-    private var minimum: Float = 0.0f
-    private var maximum: Float = 10.0f
-    private var from: Float = 600.0f
-    private var to: Int = 0
-    private var s: Float = 0.0f
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AndroidThreeTen.init(this);
+
         baseView = GeneralPageBinding.inflate(layoutInflater)
         setContentView(baseView.root)
 

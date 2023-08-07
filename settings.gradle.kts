@@ -13,6 +13,7 @@ dependencyResolutionManagement {
     }
 }
 
+
 rootProject.name = "Weather_Android"
 include(":app")
  
