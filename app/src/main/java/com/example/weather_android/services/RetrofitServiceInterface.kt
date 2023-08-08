@@ -7,7 +7,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface RetrofitServiceInterface {
-    //@Headers("Content-Type:application/json")
+
     @GET("forecast")
     fun getForecast(
         @Query("lat") lat: Double,

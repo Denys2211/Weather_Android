@@ -12,6 +12,7 @@ import com.example.weather_android.models.ForecastResponse
 import com.example.weather_android.models.ListItem
 import com.example.weather_android.services.RetrofitServiceBuilder
 import com.example.weather_android.services.RetrofitServiceInterface
+import com.example.weather_android.viewModels.ForecastAdapter
 import com.jakewharton.threetenabp.AndroidThreeTen
 import retrofit2.Call
 import retrofit2.Callback
@@ -33,8 +34,9 @@ class MainActivity : ComponentActivity() {
         setHeightFrame()
 
         setScrollListener()
-
         getForecast()
+
+
     }
 
     fun getColorWithAlpha(alpha: Float, baseColor: Int): Int {
@@ -67,34 +69,33 @@ class MainActivity : ComponentActivity() {
         })
     }
 
-    fun getForecast(){
+    fun getForecast() {
         var retrofit = RetrofitServiceBuilder.buildService(RetrofitServiceInterface::class.java)
-        try{
-            retrofit.getForecast(49.8,24.0,
-                Constants.NetworkService.API_KEY_VALUE,
-                Constants.Coords.METRIC).enqueue(object: Callback<ForecastResponse>{
-                override fun onResponse(
-                    call: Call<ForecastResponse>,
-                    response: Response<ForecastResponse>
-                ) {
-                    try{
-                        var responseBody = response.body()
-                        listDaily = responseBody!!.list!!
+        retrofit.getForecast(
+            49.8, 24.0,
+            Constants.NetworkService.API_KEY_VALUE,
+            Constants.Coords.METRIC
+        ).enqueue(object : Callback<ForecastResponse> {
+            override fun onResponse(
+                call: Call<ForecastResponse>,
+                response: Response<ForecastResponse>
+            ) {
+                try {
 
-                    }catch (ex: Exception){
-                        ex.printStackTrace()
-                    }
+                    var responseBody = response.body()
+                    listDaily = responseBody!!.list!!
+                    var adapter = ForecastAdapter(listDaily)
+                    baseView.forecastRecycle.adapter = adapter
+
+                } catch (ex: Exception) {
+                    ex.printStackTrace()
                 }
+            }
 
-                override fun onFailure(call: Call<ForecastResponse>, t: Throwable) {
-                    var d = t
-                }
+            override fun onFailure(call: Call<ForecastResponse>, t: Throwable) {
 
-            })
-
-        }catch (ex1: Exception){
-            ex1.printStackTrace()
-        }
+            }
+        })
 
     }
 }

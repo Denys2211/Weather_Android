@@ -68,6 +68,18 @@ data class ListItem(
         }
     }
 
+     fun getDateTime(): String? {
+        return try {
+            val sdf = SimpleDateFormat("dd/MM/yyyy")
+            val netDate = Date(dt!!.toLong() * 1000)
+            sdf.format(netDate)
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
+    }
+
     fun getColor(): Int {
         return when (dt?.let { getDateTime(it) }) {
             DayOfWeek.MONDAY -> Color.parseColor("#28E0AE")
