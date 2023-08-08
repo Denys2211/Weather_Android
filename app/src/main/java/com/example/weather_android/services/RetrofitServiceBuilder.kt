@@ -1,16 +1,17 @@
 package com.example.weather_android.services
 
+import com.example.weather_android.core.Constants
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object ServiceBuilder {
+object RetrofitServiceBuilder {
 
     private val client = OkHttpClient.Builder().build()
 
     private val retrofit = Retrofit.Builder()
         .client(client)
-        .baseUrl("https://api.openweathermap.org/data/2.5/onecall?lat=")
+        .baseUrl(Constants.NetworkService.BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
