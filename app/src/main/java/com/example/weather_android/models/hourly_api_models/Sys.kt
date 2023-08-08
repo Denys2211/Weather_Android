@@ -1,4 +1,4 @@
-package com.example.weather_android.models
+package com.example.weather_android.models.hourly_api_models
 
 import android.os.Parcelable
 import com.squareup.moshi.Json
@@ -7,8 +7,8 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 @JsonClass(generateAdapter = true)
-data class Rain(
+data class Sys(
 
-    @Json(name = "3h")
-    val jsonMember3h: Double?
+    @Json(name = "pod")
+    val pod: String?
 ) : Parcelable

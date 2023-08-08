@@ -1,16 +1,19 @@
 package com.example.weather_android.viewModels
 
-
+import android.content.Context
+import android.graphics.Rect
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weather_android.R
-import com.example.weather_android.models.ListItem
+import com.example.weather_android.models.daily_api_models.Daily
 
-class ForecastAdapter(private val mList: List<ListItem>
+class ForecastAdapter(private val mList: List<Daily>
 ) : RecyclerView.Adapter<ForecastAdapter.viewHolder>() {
     class viewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
            val textDay: TextView = itemView.findViewById((R.id.textDay))
@@ -32,8 +35,8 @@ class ForecastAdapter(private val mList: List<ListItem>
         var forecast = mList[position]
 
         holder.textDay.setText(forecast.getDay())
-        holder.textTime.setText(forecast.getDateTime())
-        holder.textCelsius.setText(forecast.main!!.temp?.toInt().toString())
+        holder.textTime.setText(forecast.getDate())
+        holder.textCelsius.setText(forecast.temp?.day?.toInt().toString())
         val resID: Int = holder.itemView.context.resources.getIdentifier("a${forecast.getWeatherItem()!!.icon}_svg", "drawable", holder.itemView.context.packageName)
         holder.forecastImage.setImageResource(resID)
     }

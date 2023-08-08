@@ -2,35 +2,44 @@ package com.example.weather_android
 
 import android.R
 import android.content.res.Resources
+import android.location.Geocoder
 import android.os.Bundle
+import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.RecyclerView
 import com.example.weather_android.controls.ScrollViewWithEndFunc
 import com.example.weather_android.core.Constants
 import com.example.weather_android.databinding.GeneralPageBinding
-import com.example.weather_android.models.ForecastResponse
-import com.example.weather_android.models.ListItem
+import com.example.weather_android.models.daily_api_models.Daily
+import com.example.weather_android.models.daily_api_models.ForecastResponse
 import com.example.weather_android.services.RetrofitServiceBuilder
 import com.example.weather_android.services.RetrofitServiceInterface
 import com.example.weather_android.viewModels.ForecastAdapter
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.jakewharton.threetenabp.AndroidThreeTen
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.Locale
 
 
 class MainActivity : ComponentActivity() {
+    private lateinit var mGeocoder: Geocoder
     private var heightRoot: Int = 1
     private lateinit var baseView: GeneralPageBinding
-    private lateinit var listDaily: List<ListItem>
+    private lateinit var listDaily: List<Daily>
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AndroidThreeTen.init(this);
-
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         baseView = GeneralPageBinding.inflate(layoutInflater)
         setContentView(baseView.root)
-
+        mGeocoder = Geocoder(applicationContext, Locale.getDefault())
         setHeightFrame()
 
         setScrollListener()
@@ -60,7 +69,7 @@ class MainActivity : ComponentActivity() {
                     )
                 )
 
-                baseView.weatherOnDay.translationY = -scrollView!!.scrollY.toFloat() + 100
+                baseView.weatherOnDay.translationY = -scrollView!!.scrollY.toFloat()
                 baseView.weatherOnDay.alpha = 1 - (alpha * 5)
             }
             override fun onEndScroll(scrollView: ScrollViewWithEndFunc?) {
@@ -83,9 +92,12 @@ class MainActivity : ComponentActivity() {
                 try {
 
                     var responseBody = response.body()
-                    listDaily = responseBody!!.list!!
+                    listDaily = responseBody!!.daily!!
+
                     var adapter = ForecastAdapter(listDaily)
                     baseView.forecastRecycle.adapter = adapter
+
+                    setCurrentWeather(responseBody)
 
                 } catch (ex: Exception) {
                     ex.printStackTrace()
@@ -98,5 +110,22 @@ class MainActivity : ComponentActivity() {
         })
 
     }
+
+    fun setCurrentWeather(forecast: ForecastResponse?){
+        baseView.textViewCelsius.setText(forecast?.current?.temp!!.toInt().toString())
+        var city = mGeocoder.getFromLocation(forecast.lat!!, forecast.lon!!, 1)
+        baseView.textCityName.setText(city?.first()?.locality)
+        baseView.textCloudity.setText(forecast!!.daily[0].weather[0].description)
+        baseView.textWind.setText("${forecast!!.daily[0].windGust.toString()}m/s")
+        baseView.textHumidity.setText("${forecast!!.current?.humidity.toString()}%")
+        baseView.textPressure.setText("${forecast!!.current?.pressure.toString()}hpa")
+        baseView.textCloudiness.setText("${forecast!!.current?.clouds.toString()}%")
+
+        val resID: Int = resources.getIdentifier("a${forecast!!.current!!.weather[0].icon}_svg", "drawable", packageName)
+        baseView.imageViewWeather.setImageResource(resID)
+        baseView.DateTime.setText(forecast!!.current?.getDateTime())
+    }
+
+
 }
 
