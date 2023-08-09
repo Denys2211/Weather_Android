@@ -1,4 +1,4 @@
-package com.example.weather_android.models
+package com.example.weather_android.models.hourly_api_models
 
 import android.graphics.Color
 import android.os.Parcelable

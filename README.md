@@ -8,4 +8,5 @@
 Weather_Android is a simple weather forecast app, which uses some APIs to fetch 5 day / 3 hour forecast data from the [OpenWeatherMap](https://openweathermap.org/forecast5) and to fetch places,cities,counties,coords etc.
 
 # Outputs
-V1.0_beta![GCiX6UrKR1](https://github.com/Denys2211/Weather_Android/assets/75207437/9248c16a-b77d-4b8b-b1fb-a8fbefd14a7a)
+V1.1_beta
+![Screenshot 2023-08-09 000138](https://github.com/Denys2211/Weather_Android/assets/75207437/c0ef1f2d-ed9a-42cf-a74e-85c2d79360f3)

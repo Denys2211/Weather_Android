@@ -1,4 +1,4 @@
-package com.example.weather_android.models
+package com.example.weather_android.models.hourly_api_models
 
 import android.os.Parcelable
 import com.squareup.moshi.Json
