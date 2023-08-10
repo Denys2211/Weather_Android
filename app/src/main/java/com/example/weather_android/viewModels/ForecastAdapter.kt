@@ -1,14 +1,10 @@
 package com.example.weather_android.viewModels
 
-import android.content.Context
-import android.graphics.Rect
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weather_android.R
 import com.example.weather_android.models.daily_api_models.Daily
@@ -36,7 +32,7 @@ class ForecastAdapter(private val mList: List<Daily>
 
         holder.textDay.setText(forecast.getDay())
         holder.textTime.setText(forecast.getDate())
-        holder.textCelsius.setText(forecast.temp?.day?.toInt().toString())
+        holder.textCelsius.setText(forecast.temp?.day?.toInt().toString()+" º")
         val resID: Int = holder.itemView.context.resources.getIdentifier("a${forecast.getWeatherItem()!!.icon}_svg", "drawable", holder.itemView.context.packageName)
         holder.forecastImage.setImageResource(resID)
     }

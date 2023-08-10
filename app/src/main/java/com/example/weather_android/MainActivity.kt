@@ -70,6 +70,7 @@ class MainActivity : ComponentActivity() {
                 )
 
                 baseView.weatherOnDay.translationY = -scrollView!!.scrollY.toFloat()
+                baseView.imageMenu.translationY = scrollView!!.scrollY.toFloat()
                 baseView.weatherOnDay.alpha = 1 - (alpha * 5)
             }
             override fun onEndScroll(scrollView: ScrollViewWithEndFunc?) {
@@ -114,7 +115,7 @@ class MainActivity : ComponentActivity() {
     fun setCurrentWeather(forecast: ForecastResponse?){
         baseView.textViewCelsius.setText(forecast?.current?.temp!!.toInt().toString())
         var city = mGeocoder.getFromLocation(forecast.lat!!, forecast.lon!!, 1)
-        baseView.textCityName.setText(city?.first()?.locality)
+        baseView.textCityName.setText(if(city?.first()?.locality == null) city?.first()?.adminArea else city?.first()?.locality)
         baseView.textCloudity.setText(forecast!!.daily[0].weather[0].description)
         baseView.textWind.setText("${forecast!!.daily[0].windGust.toString()}m/s")
         baseView.textHumidity.setText("${forecast!!.current?.humidity.toString()}%")

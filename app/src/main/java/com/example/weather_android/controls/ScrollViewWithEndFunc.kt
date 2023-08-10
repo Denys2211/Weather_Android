@@ -5,18 +5,19 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.widget.ScrollView
+import androidx.core.widget.NestedScrollView
 import kotlin.math.abs
 enum class DirectionScroll{
     UP, Down, NON
 }
 
 class ScrollViewWithEndFunc (
-    context: Context?,
+    context: Context,
     attrs: AttributeSet?,
     defStyle: Int
-) : ScrollView(context, attrs, defStyle) {
-    constructor(context: Context?) : this(context, null, 0) {}
-    constructor(context: Context?, attrs: AttributeSet?) : this(context, attrs, 0) {}
+) : NestedScrollView(context, attrs, defStyle) {
+    constructor(context: Context) : this(context, null, 0) {}
+    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0) {}
 
     interface OnScrollListener {
         fun onScrollChanged(scrollView: ScrollViewWithEndFunc?, x: Int, y: Int, oldX: Int, oldY: Int)
