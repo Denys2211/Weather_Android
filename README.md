@@ -9,4 +9,4 @@ Weather_Android is a simple weather forecast app, which uses some APIs to fetch 
 
 # Outputs
 V1.1_beta
-![Screenshot 2023-08-09 000138](https://github.com/Denys2211/Weather_Android/assets/75207437/c0ef1f2d-ed9a-42cf-a74e-85c2d79360f3)
+<img height= "500" src="https://github.com/Denys2211/Weather_Android/assets/75207437/92a4b7a9-70ca-4ff6-8288-041bcdddc9e2.gif" alt="Gif4" /></p>
